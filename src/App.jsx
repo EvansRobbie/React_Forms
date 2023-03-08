@@ -1,12 +1,14 @@
 import './App.css'
-import Form from './components/Form'
+// import Form from './components/Form'
+import Formik from './components/Formik'
 
 function App() {
 
 
   return (
     <div className="">
-     <Form/>
+     {/* <Form/> */}
+     <Formik/>
     </div>
   )
 }
