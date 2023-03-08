@@ -47,6 +47,7 @@ const Formik = () => {
                 <input 
                     onChange={formik.handleChange}
                     value={formik.values.names}
+                    onBlur ={formik.handleBlur}
                     type="text" 
                     id='names'
                     name='names'
@@ -54,7 +55,7 @@ const Formik = () => {
                     className='w-full outline-none px-2 py-1 placeholder-slate-500 focus:bg-teal-500 rounded-full '
                     />
                     {/* {error && <span>{error}</span>} */}
-                    {formik.errors.names && <span className='text-red-500 text-center flex  justify-center w-full'>{formik.errors.names}</span>}
+                    {formik.touched.names && formik.errors.names ?  <span className='text-red-500 text-center flex  justify-center w-full'>{formik.errors.names}</span>: null}
                 </div>
                 <div className='flex flex-col items-start w-full px-5 py-2 gap-1'>
                     
@@ -62,13 +63,13 @@ const Formik = () => {
                         <input 
                         onChange={formik.handleChange}
                         value={formik.values.emails}
-                        type="email" 
+                        onBlur ={formik.handleBlur}
                         id='emails'
                         name='emails'
                         placeholder='Email' 
                         className='w-full outline-none rounded-full text-base px-2 py-1 placeholder-slate-500 focus:bg-teal-500'
                         />
-                        {formik.errors.emails && <span className='text-red-500 text-center flex  justify-center w-full'>{formik.errors.emails}</span>}
+                        {formik.touched.emails && formik.errors.emails ?  <span className='text-red-500 text-center flex  justify-center w-full'>{formik.errors.emails}</span> : null}
                 </div>
                 <div className='flex flex-col items-start w-full px-5 py-2 gap-1'>
                     
@@ -76,13 +77,14 @@ const Formik = () => {
                     <input 
                     onChange={formik.handleChange}
                     value={formik.values.passwords}
+                    onBlur ={formik.handleBlur}
                     type="password" 
                     id='passwords'
                     name='passwords'
                     placeholder='Password' 
                     className='w-full outline-none rounded-full text-base px-2 py-1 focus:bg-teal-500 placeholder-slate-500'
                     />
-                    {formik.errors.passwords && <span className='text-red-500 text-center flex  justify-center w-full'>{formik.errors.passwords}</span>}
+                    {formik.touched.passwords && formik.errors.passwords ? <span className='text-red-500 text-center flex  justify-center w-full'>{formik.errors.passwords}</span>: null}
                 </div>
                 <button type='submit' className=' w-[20vw] text-slate-200 my-4 bg-slate-900 rounded-lg py-1  active:scale-105 shadow-lg hover:shadow-teal-500 duration-300  ease-in hover:translate-x-5'>Submit</button>
             </form>
