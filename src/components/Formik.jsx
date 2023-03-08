@@ -1,18 +1,34 @@
 import React from 'react'
 import { useFormik } from 'formik'
 const initialValues = {
+    names: '',
+    emails:'',
+    passwords:'',
+}
+const onSubmit = values =>{
+    console.log(values)
 
+}
+const validate = values =>{
+    const error = {}
+    if(!values.names){
+        error.names = 'Required'
+    }
+    if(!values.emails){
+        error.emails = 'Required'
+    }else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.emails)){
+        error.emails = 'Invalid Email'
+    }
+    if(!values.passwords){
+        error.passwords = 'Required'
+    }
+return error
 }
 const Formik = () => {
     const formik = useFormik({
-        initialValues: {
-                names: '',
-                emails:'',
-                passwords:'',
-        },
-        onSubmit: values =>{
-            console.log(values)
-        }
+        initialValues,
+        onSubmit,
+        validate
     }
     )
     // const handleSubmit = (event) => {
@@ -38,7 +54,7 @@ const Formik = () => {
                     className='w-full outline-none px-2 py-1 placeholder-slate-500 focus:bg-teal-500 rounded-full '
                     />
                     {/* {error && <span>{error}</span>} */}
-                    {/* {error.name && <span className='text-red-500 text-center'>{error.name}</span>} */}
+                    {formik.errors.names && <span className='text-red-500 text-center flex  justify-center w-full'>{formik.errors.names}</span>}
                 </div>
                 <div className='flex flex-col items-start w-full px-5 py-2 gap-1'>
                     
@@ -52,7 +68,7 @@ const Formik = () => {
                         placeholder='Email' 
                         className='w-full outline-none rounded-full text-base px-2 py-1 placeholder-slate-500 focus:bg-teal-500'
                         />
-                        {/* {error.email && <span className='text-red-500 text-center'>{error.email}</span>} */}
+                        {formik.errors.emails && <span className='text-red-500 text-center flex  justify-center w-full'>{formik.errors.emails}</span>}
                 </div>
                 <div className='flex flex-col items-start w-full px-5 py-2 gap-1'>
                     
@@ -66,7 +82,7 @@ const Formik = () => {
                     placeholder='Password' 
                     className='w-full outline-none rounded-full text-base px-2 py-1 focus:bg-teal-500 placeholder-slate-500'
                     />
-                    {/* {error.password && <span className='text-red-500 text-center'>{error.password}</span>} */}
+                    {formik.errors.passwords && <span className='text-red-500 text-center flex  justify-center w-full'>{formik.errors.passwords}</span>}
                 </div>
                 <button type='submit' className=' w-[20vw] text-slate-200 my-4 bg-slate-900 rounded-lg py-1  active:scale-105 shadow-lg hover:shadow-teal-500 duration-300  ease-in hover:translate-x-5'>Submit</button>
             </form>
