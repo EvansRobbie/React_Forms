@@ -1,6 +1,7 @@
 import './App.css'
 // import Form from './components/Form'
 import Formik from './components/Formik'
+import NewFormik from './components/NewFormik'
 
 function App() {
 
@@ -8,7 +9,8 @@ function App() {
   return (
     <div className="">
      {/* <Form/> */}
-     <Formik/>
+     {/* <Formik/> */}
+     <NewFormik/>
     </div>
   )
 }

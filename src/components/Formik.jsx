@@ -1,5 +1,6 @@
 import React from 'react'
 import { useFormik } from 'formik'
+import * as Yup from 'yup'
 const initialValues = {
     names: '',
     emails:'',
@@ -9,26 +10,31 @@ const onSubmit = values =>{
     console.log(values)
 
 }
-const validate = values =>{
-    const error = {}
-    if(!values.names){
-        error.names = 'Required'
-    }
-    if(!values.emails){
-        error.emails = 'Required'
-    }else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.emails)){
-        error.emails = 'Invalid Email'
-    }
-    if(!values.passwords){
-        error.passwords = 'Required'
-    }
-return error
-}
+// const validate = values =>{
+//     const error = {}
+//     if(!values.names){
+//         error.names = 'Required'
+//     }
+//     if(!values.emails){
+//         error.emails = 'Required'
+//     }else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.emails)){
+//         error.emails = 'Invalid Email'
+//     }
+//     if(!values.passwords){
+//         error.passwords = 'Required'
+//     }
+// return error
+// }
+const validationSchema = Yup.object({
+    names: Yup.string().required('Required'),
+    emails: Yup.string().email('Invalid Email Address').required('Required'),
+    passwords:Yup.string().required('Required')
+})
 const Formik = () => {
     const formik = useFormik({
         initialValues,
         onSubmit,
-        validate
+        validationSchema
     }
     )
     // const handleSubmit = (event) => {
